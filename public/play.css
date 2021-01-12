@@ -32,23 +32,42 @@
     width: 100%;
 }
 
-a:link {
+.country:link {
   color: black;
   text-decoration: none;
 }
 
-a:visited {
+.country:visited {
   color: black;
   text-decoration: none;
 }
 
-a:hover {
+.country:hover {
   color: black;
   text-decoration: underline;
 }
 
-a:active {
+.country:active {
   color: black;
   text-decoration: none;
 }
 
+.control:link {
+  color: blue;
+  text-decoration: underline;
+}
+
+.control:visited {
+  color: blue;
+  text-decoration: underline;
+}
+
+.control:hover {
+  color: blue;
+  text-decoration: underline;
+}
+
+.control:active {
+  color: blue;
+  text-decoration: underline;
+}

@@ -1,0 +1,59 @@
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>The Ultimate Country Capital Test</title>
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script src="capitals.js"></script>
+    <script src="content.js"></script>
+
+    <link rel="stylesheet" href="play.css">
+</head>
+
+<body>
+
+    <div class="main">
+
+        <h1 id="page-title">The Ultimate Country Capital Test</h1>
+        <p id="current-display">
+            Enter the capital of <span class="bold" id="current-country"></span>:
+            <input type='text' id='capital-input'></input>
+        </p>
+        <p id="controls">
+            <a href="#" onclick="selectPrevious()" class="control"><span>Previous</span></a>
+            &nbsp&nbsp&nbsp|&nbsp&nbsp&nbsp
+            <a href="#" onclick="selectNext()" class="control"><span>Next</span></a>
+            &nbsp&nbsp&nbsp|&nbsp&nbsp&nbsp
+            <a href="#" onclick="selectRandom()" class="control"><span>Random</span></a>
+        </p>
+        <p id="stats">
+            <span class="bold">Done: </span><span id="num-done"></span>
+            &nbsp&nbsp&nbsp|&nbsp&nbsp&nbsp
+            <span class="bold">Remaining: </span><span id="num-remaining"></span>
+        </p>
+
+        <h2>Africa</h2>
+        <div id="africa" class="continent"></div>
+        <h2>Asia</h2>
+        <div id="asia" class="continent"></div>
+        <h2>Europe</h2>
+        <div id="europe" class="continent"></div>
+        <h2>North America</h2>
+        <div id="north-america" class="continent"></div>
+        <h2>Oceania</h2>
+        <div id="oceania" class="continent"></div>
+        <h2>South America</h2>
+        <div id="south-america" class="continent"></div>
+        <br><br>
+        <a href="index.html">Back to Welcome page</a>
+    </div>
+</body>
+
+</html>

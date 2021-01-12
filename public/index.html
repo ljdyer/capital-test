@@ -14,43 +14,54 @@
     <script src="capitals.js"></script>
     <script src="content.js"></script>
 
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="index.css">
 </head>
 
 <body>
 
     <div class="main">
-
-        <h1 id="page-title">The Ultimate Country Capital Test</h1>
-        <p id="current-display">
-            Enter the capital of <span class="bold" id="current-country"></span>:
-            <input type='text' id='capital-input'></input>
-        </p>
-        <p id="controls">
-            <a href="#" onclick="selectPrevious()"><span>Previous</span></a>
-            &nbsp&nbsp&nbsp|&nbsp&nbsp&nbsp
-            <a href="#" onclick="selectNext()"><span>Next</span></a>
-            &nbsp&nbsp&nbsp|&nbsp&nbsp&nbsp
-            <a href="#" onclick="selectRandom()"><span>Random</span></a>
-        </p>
-        <p id="stats">
-            <span class="bold">Done: </span><span id="num-done"></span>
-            &nbsp&nbsp&nbsp|&nbsp&nbsp&nbsp
-            <span class="bold">Remaining: </span><span id="num-remaining"></span>
-        </p>
-
-        <h2>Africa</h2>
-        <div id="africa" class="continent"></div>
-        <h2>Asia</h2>
-        <div id="asia" class="continent"></div>
-        <h2>Europe</h2>
-        <div id="europe" class="continent"></div>
-        <h2>North America</h2>
-        <div id="north-america" class="continent"></div>
-        <h2>Oceania</h2>
-        <div id="oceania" class="continent"></div>
-        <h2>South America</h2>
-        <div id="south-america" class="continent"></div>
-        
-    </div>>
+        <div style = "text-align:center;">
+            <h1 id="page-title">The Ultimate Country Capital Test</h1>
+            <h2>Version 1.001</h2>
+            <p style="font-weight:bold;">Important: This site is not optimised for smartphones. Please access from a desktop or
+                laptop computer.</p>
+        </div>
+        <div style="text-align:left;">
+            <h2>Rules of Engagement</h2>
+            <ul>
+                <li>In order to test that you know what the capital of each country is, and not just the names of the cities, the country must be selected before entering the name of the capital.</li>
+                <li>Countries may be selected in any order, and once a capital has been entered correctly the country will be removed from the list so that you can easily see which countries remain.</li>
+                <li>As of the current version, capital names will only be recognised if they are entered exactly as they are registered. A fuzzy match feature is planned for a future version (see "Upcoming Features" below).</li>
+            </ul>
+            <h2>Source of Truth</h2>
+            Country and capital names were taken from the Wikipedia <a href="https://simple.wikipedia.org/wiki/List_of_countries_by_continents" target="_blank">List of countries by continents</a> page on 11th Jan 2021 and compiled as follows:
+            <ul>
+                <li>Alternate spellings, translations, etc. removed to leave a single standard country/capital name.</li>
+                <li>Countries without a capital city removed.</li>
+                <li>In cases where more than one capital is listed, cities other than the "official capital" removed.</li>
+                <li>All non-English characters replaced with their closest English equivalent (e.g. 'é' changed to 'e') for ease of input.</li>
+            </ul>
+            <h2>How to Play</h2>
+            <ul>
+                <li>The first country (Algeria) will be selected when you load the game. If you know the capital of Algeria, just start typing!</li>
+                <li>When the content of the text box matches the capital exactly as it is registered, your score will increase by 1, the country will be removed from the list, and the next country will automatically be selected.</li>
+                <li>You can change the selected country using the "Previous", "Next", or "Random" options, or by selecting any country from the list</li>
+                <li style="font-weight: bold;">Hint: There is no need to use your mouse! Use the Tab key to navigate forward through the links, Shift + Tab to navigate backwards, and Enter to select.</li>
+                    <ul>
+                        <li>Key "Tab, Tab, Enter" to go to the next country.</li>
+                        <li>Hold the Tab key to navigate quickly through the countries. The focus will return to the input box when you press Enter to select a country.</li>
+                    </ul>
+            </ul>
+            <h2>Upcoming Features</h2>
+            <ul>
+                <li>1</li>
+                <li>2</li>
+                <li>3</li>
+            </ul>
+        </div>
+        <div style = "text-align:center;">
+            <a href="play.html"><h2>Ready? Click here to play!</h2></a>
+        </div>    
+    </div>
 </body>
+</html>
