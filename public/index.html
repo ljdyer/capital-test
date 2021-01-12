@@ -22,19 +22,35 @@
     <div class="main">
 
         <h1 id="page-title">The Ultimate Country Capital Test</h1>
-        <p id="current-display">How many capital cities do you know?</p>
+        <p id="current-display">
+            Enter the capital of <span class="bold" id="current-country"></span>:
+            <input type='text' id='capital-input'></input>
+        </p>
+        <p id="controls">
+            <a href="#" onclick="selectPrevious()"><span>Previous</span></a>
+            &nbsp&nbsp&nbsp|&nbsp&nbsp&nbsp
+            <a href="#" onclick="selectNext()"><span>Next</span></a>
+            &nbsp&nbsp&nbsp|&nbsp&nbsp&nbsp
+            <a href="#" onclick="selectRandom()"><span>Random</span></a>
+        </p>
+        <p id="stats">
+            <span class="bold">Done: </span><span id="num-done"></span>
+            &nbsp&nbsp&nbsp|&nbsp&nbsp&nbsp
+            <span class="bold">Remaining: </span><span id="num-remaining"></span>
+        </p>
+
         <h2>Africa</h2>
-        <div id="africa"></div>
+        <div id="africa" class="continent"></div>
         <h2>Asia</h2>
-        <div id="asia"></div>
+        <div id="asia" class="continent"></div>
         <h2>Europe</h2>
-        <div id="europe"></div>
+        <div id="europe" class="continent"></div>
         <h2>North America</h2>
-        <div id="north-america"></div>
+        <div id="north-america" class="continent"></div>
         <h2>Oceania</h2>
-        <div id="oceania"></div>
+        <div id="oceania" class="continent"></div>
         <h2>South America</h2>
-        <div id="south-america"></div>
+        <div id="south-america" class="continent"></div>
         
     </div>>
 </body>

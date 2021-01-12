@@ -1,3 +1,10 @@
+.country{
+  padding-left: 8px;
+  padding-right: 8px;
+  display: inline-block;
+}
+
+
 .main{
     width: 80%;
     margin: auto;
@@ -12,6 +19,36 @@
     background-color:white;
 }
 
+.bold{
+    font-weight:bold;
+}
+
+.current{
+    font-weight:bold;
+    background-color: gainsboro;
+}
+
 #continents{
     width: 100%;
 }
+
+a:link {
+  color: black;
+  text-decoration: none;
+}
+
+a:visited {
+  color: black;
+  text-decoration: none;
+}
+
+a:hover {
+  color: black;
+  text-decoration: underline;
+}
+
+a:active {
+  color: black;
+  text-decoration: none;
+}
+
