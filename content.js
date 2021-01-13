@@ -128,5 +128,23 @@ $(document).ready(function () {
     $("#capital-input").on("input", function () {
         checkCapitalInput();
     });
+    $(document).keydown(function (event) {
+        console.log(event);
+        if (event.ctrlKey && event.which == 37) { 
+            selectPrevious();
+        }
+        if (event.ctrlKey && event.which == 39) { 
+            selectNext();
+        }
+        if (event.ctrlKey && event.which == 38) { 
+            selectRandom();
+        }
+        if (event.ctrlKey && event.which == 40) { 
+            revealCapital();
+        }
+
+        // $("#result").text(String.fromCharCode(event.which));
+        // event.preventDefault();
+    });
 
 });

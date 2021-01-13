@@ -20,42 +20,71 @@
 
 <body>
 
-    <div class="main">
+    <div class="box">
 
-        <h1 id="page-title">The Ultimate Country Capital Test</h1>
-        <p id="current-display">
-            Enter the capital of <span class="bold" id="current-country"></span>:
-            <input type='text' id='capital-input'></input>
-        </p>
-        <p id="controls">
-            <a href="#" onclick="selectPrevious()" class="control"><span>Previous</span></a>
-            &nbsp&nbsp&nbsp|&nbsp&nbsp&nbsp
-            <a href="#" onclick="selectNext()" class="control"><span>Next</span></a>
-            &nbsp&nbsp&nbsp|&nbsp&nbsp&nbsp
-            <a href="#" onclick="selectRandom()" class="control"><span>Random</span></a>
-            &nbsp&nbsp&nbsp|&nbsp&nbsp&nbsp
-            <a href="#" onclick="revealCapital()" class="control"><span>Reveal</span></a>
-        </p>
-        <p id="stats">
-            <span class="bold">Done: </span><span id="num-done"></span>
-            &nbsp&nbsp&nbsp|&nbsp&nbsp&nbsp
-            <span class="bold">Remaining: </span><span id="num-remaining"></span>
-        </p>
+        <div class = "row header">
+            <h1 id="page-title">The Ultimate Country Capital Test</h1>
+            <p id="current-display">
+                <h4 style="display:inline">Enter the capital of <span class="bold" id="current-country"></span>:</h4>
+                <input style="display:inline; font-size:20px" type='text' id='capital-input'></input>
+            </p>
+            <p id="controls">
+                <table class="control-table" style="border:none; margin:auto">
+                    <tr>
+                        <th>
+                            <a href="#" onclick="selectPrevious()" class="control"><span>Previous</span></a>
+                        </th>
+                        <th>
+                            <a href="#" onclick="selectNext()" class="control"><span>Next</span></a>
+                        </th>
+                        <th>
+                            <a href="#" onclick="selectRandom()" class="control"><span>Random</span></a>
+                        </th>
+                        <th>
+                            <a href="#" onclick="revealCapital()" class="control"><span>Reveal</span></a>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>
+                            Ctrl + &#8592;
+                        </th>
+                        <th>
+                            Ctrl + &#8594;
+                        </th>
+                        <th>
+                            Ctrl + &#8593;
+                        </th>
+                        <th>
+                            Ctrl + &#8595;
+                        </th>
+                    </tr>
+                </table>                
+            </p>
+            <p id="stats">
+                <h4 class="bold" style="display:inline">Done: </span><span id="num-done"></h4>
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                <h4 class="bold" style="display:inline">Remaining: </span><span id="num-remaining"></h4>
+            </p>
+        </div>
 
-        <h2>Africa</h2>
-        <div id="africa" class="continent"></div>
-        <h2>Asia</h2>
-        <div id="asia" class="continent"></div>
-        <h2>Europe</h2>
-        <div id="europe" class="continent"></div>
-        <h2>North America</h2>
-        <div id="north-america" class="continent"></div>
-        <h2>Oceania</h2>
-        <div id="oceania" class="continent"></div>
-        <h2>South America</h2>
-        <div id="south-america" class="continent"></div>
-        <br><br>
-        <a href="index.html">Back to Welcome page</a>
+        <div class = "row content align-center">
+            <h2>Africa</h2>
+            <div id="africa" class="continent"></div>
+            <h2>Asia</h2>
+            <div id="asia" class="continent"></div>
+            <h2>Europe</h2>
+            <div id="europe" class="continent"></div>
+            <h2>North America</h2>
+            <div id="north-america" class="continent"></div>
+            <h2>Oceania</h2>
+            <div id="oceania" class="continent"></div>
+            <h2>South America</h2>
+            <div id="south-america" class="continent"></div>
+        </div>
+
+        <div class = "row footer padded">
+            <a href="index.html">Back to Welcome page</a>
+        </div>
     </div>
 </body>
 
