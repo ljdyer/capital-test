@@ -92,7 +92,7 @@ const asiaCapitals = {
     "Saudi Arabia": "Riyadh",
     "Singapore": "Singapore",
     "South Korea": "Seoul",
-    "Sri Lanka": "Sri Jayawardenapura Kotte",
+    "Sri Lanka": "Sri Jayawardenepura Kotte",
     "Syria": "Damascus",
     "Taiwan": "Taipei",
     "Tajikistan": "Dushanbe",
@@ -133,7 +133,7 @@ const europeCapitals = {
     "Luxembourg": "Luxembourg City",
     "Malta": "Valletta",
     "Moldova": "Chisinau",
-    "Monaco": "Monte Carlo Quarter",
+    "Monaco": "Monaco",
     "Montenegro": "Podgorica",
     "Netherlands": "Amsterdam",
     "North Macedonia": "Skopje",
@@ -217,7 +217,7 @@ const oceaniaCapitals = {
 
 const southAmericaCapitals = {
     "Argentina": "Buenos Aires",
-    "Bolivia": "Sucre",
+    "Bolivia": "La Paz",
     "Brazil": "Brasilia",
     "Chile": "Santiago",
     "Colombia": "Bogota",

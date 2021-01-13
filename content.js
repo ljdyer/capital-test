@@ -52,7 +52,7 @@ function checkCapitalInput(){
 
 function handleCorrectInput(country){
     done.push(country);
-    doneCountry = $('.current');
+    let doneCountry = $('.current');
     selectNext();
     doneCountry.remove();
     refreshStats();
@@ -106,6 +106,15 @@ function selectRandom() {
 function getRandomInt(min, max){
     randomInt = Math.floor(Math.random() * max - min + 1) + min;
     return randomInt;
+}
+
+function revealCapital(){
+    let currentCountry = $('.current');
+    let currentCountryName = $('.current').text();
+    alert(`The capital of ${currentCountryName} is ${allCapitals[currentCountryName]}.`)
+    selectNext();
+    currentCountry.remove();
+    refreshStats();
 }
 
 function textMatch(a, b){

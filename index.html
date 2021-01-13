@@ -15,6 +15,7 @@
     <script src="content.js"></script>
 
     <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -22,24 +23,17 @@
     <div class="main">
         <div style = "text-align:center;">
             <h1 id="page-title">The Ultimate Country Capital Test</h1>
-            <h2>Version 1.002</h2>
+            <h3>Version 1.003</h3>
             <p style="font-weight:bold;">Important: This site is not optimised for smartphones. Please access from a desktop or
                 laptop computer.</p>
         </div>
-        <div style="text-align:left;">
+        <div style="text-align:left;" id="instructions">
             <h2>Rules of Engagement</h2>
             <ul>
                 <li>In order to test that you know what the capital of each country is, and not just the names of the cities, the country must be selected before entering the name of the capital.</li>
                 <li>Countries may be selected in any order, and once a capital has been entered correctly the country will be removed from the list so that you can easily see which countries remain.</li>
-                <li>As of the current version, capital names will only be recognised if they are entered exactly as they are registered. A fuzzy match feature is planned for a future version (see "Upcoming Features" below).</li>
-            </ul>
-            <h2>Source of Truth</h2>
-            Country and capital names were taken from the Wikipedia <a href="https://simple.wikipedia.org/wiki/List_of_countries_by_continents" target="_blank">List of countries by continents</a> page on 11th Jan 2021 and compiled as follows:
-            <ul>
-                <li>Alternate spellings, translations, etc. removed to leave a single standard country/capital name.</li>
-                <li>Countries without a capital city removed.</li>
-                <li>In cases where more than one capital is listed, cities other than the "official capital" removed.</li>
-                <li>All non-English characters replaced with their closest English equivalent (e.g. 'é' changed to 'e') for ease of input.</li>
+                <li>If you use the "Reveal" option to display a country's capital, that country will be removed from the list and you will not be able to score a point for it in the current play.</li>
+                <li>As of the current version, capital names will only be recognised if they are entered exactly as registered. A fuzzy match feature is planned for a future version (see "Upcoming Features" below).</li>
             </ul>
             <h2>How to Play</h2>
             <ul>
@@ -52,16 +46,29 @@
                         <li>Hold the Tab key to navigate quickly through the countries. The focus will return to the input box when you press Enter to select a country.</li>
                     </ul>
             </ul>
+            <h2>Source of Truth</h2>
+            Country and capital names were taken from the Wikipedia <a href="https://simple.wikipedia.org/wiki/List_of_countries_by_continents" target="_blank">List of countries by continents</a> page on 11th Jan 2021 and compiled as follows:
+            <ul>
+                <li>Alternate spellings, translations, etc. removed to leave a single standard country/capital name.</li>
+                <li>Countries without a capital city removed.</li>
+                <li>In cases where more than one capital is listed, cities other than the "official capital" removed.</li>
+                <li>All non-English characters replaced with their closest English equivalent (e.g. 'é' changed to 'e') for ease of input.</li>
+            </ul>
             <h2>Upcoming Features</h2>
             <ul>
-                <li>1</li>
-                <li>2</li>
-                <li>3</li>
+                <li>Allow for alternate spellings, etc. by checking the content of the input box when a player selects "reveal". Award a point if the input approximately matches the answer.</li>
+                <li>Implement a "results" button to link to a summary of done and remaining countries/capitals.</li>
+                <li>Generate a practice page where users are tested on a random selection of 5-10 remaining capitals to train for their next play.</li>
             </ul>
+            <h2>Get in Touch</h2>
+            To suggest new features, report bugs, dispute capitals, etc., please get in touch with the creator Laurence by emailing <a href="mailto:ljdyer@gmail.com">ljdyer@gmail.com</a>.
+
         </div>
         <div style = "text-align:center;">
             <a href="play.html"><h2>Ready? Click here to play!</h2></a>
-        </div>    
+            <a href="https://github.com/ljdyer/capital-test" target="_blank"><p>View the source at GitHub</p></a>
+        </div>
+
     </div>
 </body>
 </html>

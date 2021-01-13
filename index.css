@@ -3,3 +3,13 @@
     margin-left: auto;
     margin-right: auto;
 }
+
+#instructions{
+    overflow-y:scroll;
+    height: 70vh;
+}
+
+a:link, a:visited, a:hover, a:active {
+  color: blue;
+  text-decoration: underline;
+}
