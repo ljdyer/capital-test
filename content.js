@@ -1,3 +1,4 @@
+const fuzzyMatchMinScore = .5
 var done = [];
 
 function populateAllContinents(){
@@ -19,12 +20,12 @@ function populateContinent(continentDiv, capitalsObject){
 function refreshStats(){
     let numDone = done.length;
     let numRemaining = $(".country").length
-    $('#num-done').text(numDone)
-    $('#num-remaining').text(numRemaining)
+    $('#num-done').text(numDone);
+    $('#num-remaining').text(numRemaining);
 }
 
 function makeCountry(country){
-    let link = $(`<a class="country" href="#" onclick="selectCountry(this);"><span>${country}</span></a>`)
+    let link = $(`<a class="country" href="#" onclick="selectCountry(this);"><span>${country}</span></a>`);
     return link;
 }
 
@@ -52,7 +53,7 @@ function checkCapitalInput(){
 
 function handleCorrectInput(country){
     done.push(country);
-    let doneCountry = $('.current');
+    let doneCountry = getCurrentCountryLink();
     selectNext();
     doneCountry.remove();
     refreshStats();
@@ -65,7 +66,7 @@ function selectFirst() {
 }
 
 function selectNext(){
-    let currentCountry = $('.current');
+    let currentCountry = getCurrentCountryLink();
     let allCountries = $('.country');
     let currentIndex = allCountries.index(currentCountry);
     let totalCountries = allCountries.length;
@@ -78,7 +79,7 @@ function selectNext(){
 }
 
 function selectPrevious(){
-    let currentCountry = $('.current');
+    let currentCountry = getCurrentCountryLink();
     let allCountries = $('.country');
     let currentIndex = allCountries.index(currentCountry);
     let totalCountries = allCountries.length;
@@ -91,7 +92,7 @@ function selectPrevious(){
 }
 
 function selectRandom() {
-    let currentCountry = $('.current');
+    let currentCountry = getCurrentCountryLink();
     let allCountries = $('.country');
     let currentIndex = allCountries.index(currentCountry);
     let totalCountries = allCountries.length;
@@ -109,42 +110,89 @@ function getRandomInt(min, max){
 }
 
 function revealCapital(){
-    let currentCountry = $('.current');
-    let currentCountryName = $('.current').text();
-    alert(`The capital of ${currentCountryName} is ${allCapitals[currentCountryName]}.`)
+    let currentCountry = getCurrentCountryLink();
+    let currentCountryName = getCurrentCountryName();
+    let currentCapitalName = allCapitals[currentCountryName];
+    let currentVal = $("#capital-input").val();
+    let fuzzyMatchScore = 0;
+    if (currentVal.length > 0){
+        fuzzyMatchScore = getFuzzyMatchScore(currentCapitalName, currentVal);
+    }
+
+    alertText = `
+        The capital of ${currentCountryName} is: ${currentCapitalName}\n
+        You entered: ${currentVal}\n
+        Fuzzy match score: ${fuzzyMatchScore.toFixed(1)} (minimum is ${fuzzyMatchMinScore})\n\n
+    `
+    if (fuzzyMatchScore >= fuzzyMatchMinScore){
+        alertText += 'You were given the benefit of the doubt and awarded a point!'
+        handleCorrectInput(currentCountry);
+    }
+    else{
+        alertText += 'Better luck next time!'
+    }
+    alert(alertText);
+
     selectNext();
     currentCountry.remove();
     refreshStats();
+}
+
+function getCurrentCountryLink(){
+    return $('.current');
+}
+
+function getCurrentCountryName(){
+    return $('.current').text();
 }
 
 function textMatch(a, b){
     return a.toLowerCase() == b.toLowerCase();
 }
 
+function getFuzzyMatchScore(a,b){
+    f = FuzzySet();
+    f.add(a);
+    fuzzyMatchResult = f.get(b);
+    if (fuzzyMatchResult == null){
+        return 0;
+    }
+    else{
+        return fuzzyMatchResult[0][0];
+    }
+}
+
 $(document).ready(function () {
+
     populateAllContinents();
     refreshStats();
     selectFirst();
+
     $("#capital-input").on("input", function () {
         checkCapitalInput();
     });
-    $(document).keydown(function (event) {
-        console.log(event);
-        if (event.ctrlKey && event.which == 37) { 
-            selectPrevious();
-        }
-        if (event.ctrlKey && event.which == 39) { 
-            selectNext();
-        }
-        if (event.ctrlKey && event.which == 38) { 
-            selectRandom();
-        }
-        if (event.ctrlKey && event.which == 40) { 
-            revealCapital();
-        }
 
-        // $("#result").text(String.fromCharCode(event.which));
-        // event.preventDefault();
+    $(document).keydown(function (event) {
+        if (event.ctrlKey || event.metaKey){
+            switch (event.which){
+                case 37: {// Left
+                    selectPrevious();
+                    break;
+                }
+                case 39: { // Right
+                    selectNext();
+                    break;
+                }
+                case 38: { // Up
+                    selectRandom();
+                    break;
+                }
+                case 40: { // Down
+                    revealCapital();
+                    break;
+                }
+            }
+        }
     });
 
 });
