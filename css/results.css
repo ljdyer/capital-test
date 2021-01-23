@@ -19,7 +19,7 @@ a:link, a:visited, a:hover, a:active {
 
 .column-holder {
   display: flex;
-  text-align: left;
+  text-align: center;
 }
 
 .column {

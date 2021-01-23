@@ -47,7 +47,18 @@ function addNotRemembered(){
     $('#num-not-remembered').text(notRemembered.length);
 }
 
+function addScoreSummary(){
+    let numCorrect = remembered.length + Object.keys(spelling).length;
+    let numTotal = Object.keys(allCapitals).length;
+    let percentCorrect = percentToTwoDp(numCorrect, numTotal);
 
+    let text = `You remembered <strong>${numCorrect}</strong> out of <strong>${numTotal}</strong> capitals (${percentCorrect}%).`;
+    $('#score-summary').html(text);
+}
+
+function percentToTwoDp(a, b){
+    return ((a / b) * 100).toFixed(0);
+}
 
 function columnizeText(text, numColumns){
     let columnHolder = $('<div class="column-holder"></div>')
@@ -115,13 +126,12 @@ $(document).ready(function () {
         }
     }
 
-    console.log(remembered);
-    console.log(guessedIncorrectly);
-    console.log(notRemembered);
     addRemembered();
     addSpelling();
     addGuessedIncorrectly();
     addNotRemembered();
+
+    addScoreSummary();
 
     // $('#num-remembered').text(numRemembered);
     // $('#num-spelling').text(numSpelling);

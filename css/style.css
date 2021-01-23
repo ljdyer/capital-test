@@ -101,9 +101,20 @@ html, body {
 .banner {
     font-size: 14pt;
     font-weight: bold;
-    background-color: gainsboro;
     padding-top: 5px;
     padding-bottom: 5px;
     margin-top: 25px;
     margin-bottom: 5px;
+}
+
+.neutral {
+    background-color: gainsboro;
+}
+
+.good{
+    background-color:#D0F0C0;
+}
+
+.bad{
+    background-color:#FFCCCB;
 }
