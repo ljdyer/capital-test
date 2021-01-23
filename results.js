@@ -6,31 +6,73 @@ var numRemembered = 0;
 var numSpelling = 0;
 var numNotRemembered = 0;
 
+var remembered = [];
+var spelling = {};
+var guessedIncorrectly = {};
+var notRemembered = [];
 
-function addRemembered(country){
-    column = $(`#remembered-column-${rememberedColumn}`);
-    column.append(`${country}: ${allCapitals[country]}<br>`);
-    rememberedColumn = addOneOrResetToOne(rememberedColumn, 3);
+function addRemembered(){
+    rememberedText = remembered.map(function(country){
+        return `${country}: ${allCapitals[country]}`
+    });
+    let columnHolder = columnizeText(rememberedText, 3);
+    $('#remembered').append(columnHolder);
+    $('#num-remembered').text(remembered.length);
 }
 
-function addSpelling(country, answer){
-    column = $(`#spelling-column-${rememberedColumn}`);
-    column.append(`${country}: <span class="incorrect">${answer}</span> <span class="correct">${allCapitals[country]}</span><br>`);
-    rememberedColumn = addOneOrResetToOne(rememberedColumn, 3);
+function addSpelling(){
+    spellingText = Object.keys(spelling).map(function(country){
+        return `${country}: <span class="incorrect">${spelling[country]}</span> <span class="correct">${allCapitals[country]}</span>`
+    });
+    let columnHolder = columnizeText(spellingText, 3);
+    $('#spelling').append(columnHolder);
+    $('#num-spelling').text(Object.keys(spelling).length);
 }
 
-function addNotRemembered(country){
-    column = $(`#not-remembered-column-${notRememberedColumn}`);
-    column.append(`${country}: ${allCapitals[country]}<br>`);
-    notRememberedColumn = addOneOrResetToOne(notRememberedColumn, 3);
+function addGuessedIncorrectly(){
+    guessedIncorrectlyText = Object.keys(guessedIncorrectly).map(function(country){
+        return `${country}: <span class="incorrect">${guessedIncorrectly[country]}</span> <span class="correct">${allCapitals[country]}</span>`
+    });
+    let columnHolder = columnizeText(guessedIncorrectlyText, 3);
+    $('#incorrect').append(columnHolder);
+    $('#num-incorrect').text(Object.keys(spelling).length);
 }
 
-function addOneOrResetToOne(x, max){
-    if (x >= max){
+function addNotRemembered(){
+    notRememberedText = notRemembered.map(function(country){
+        return `${country}: ${allCapitals[country]}`
+    });
+    let columnHolder = columnizeText(notRememberedText, 3);
+    $('#not-remembered').append(columnHolder);
+    $('#num-not-remembered').text(notRemembered.length);
+}
+
+
+
+function columnizeText(text, numColumns){
+    let columnHolder = $('<div class="column-holder"></div>')
+
+    let columns = [];
+    Array(numColumns).fill().map(function(x){
+        columns.push($('<div class="column"></div>'))
+    });
+
+    let currentColumn = 1;
+    text.map(function(thisText){
+        columns[currentColumn - 1].append(thisText + "<br>");
+        currentColumn = incrementOrReset(currentColumn, numColumns);
+    });
+
+    columns.map(x => columnHolder.append(x));
+    return columnHolder;
+}
+
+function incrementOrReset(x, max){
+    if (x >= max) {
         return 1;
     }
-    else{
-        return x+1
+    else {
+        return x + 1
     }
 }
 
@@ -38,35 +80,53 @@ function addOneOrResetToOne(x, max){
 
 $(document).ready(function () {
 
-    var results = JSON.parse(localStorage.getItem("results"));
+    let correct = JSON.parse(localStorage.getItem("correct"));
+    let incorrect = JSON.parse(localStorage.getItem("incorrect"));
     allCountries = Object.keys(allCapitals);
-    rememberedCountries = Object.keys(results);
+    rememberedCountries = Object.keys(correct);
+    incorrectCountries = Object.keys(incorrect);
 
-    for (i=0; i<allCountries.length; i++){
+    for (let i=0; i<allCountries.length; i++){
         let country = allCountries[i];
         let capital = allCapitals[country];
-        let answer = results[country];
-
+        let answer = "";
+        
         if (rememberedCountries.includes(country)){
+            answer = correct[country];
             if (textMatch(capital, answer)) {
-                addRemembered(country);
-                numRemembered += 1;
+                // Remembered
+                remembered.push(country);
             }
             else {
-                addSpelling(country, answer);
-                numSpelling += 1;
+                // Remembered with spelling mistake
+                spelling[country] = answer;
             }
         }
         else{
-            addNotRemembered(allCountries[i]);
-            numNotRemembered += 1;
+            if (incorrectCountries.includes(country)){
+                // Guessed incorrectly
+                answer = incorrect[country];
+                guessedIncorrectly[country] = answer;
+            }
+            else{
+                // Not remembered
+                notRemembered.push(country);
+            }
         }
     }
 
-    $('#num-remembered').text(numRemembered);
-    $('#num-spelling').text(numSpelling);
-    $('#num-not-remembered').text(numNotRemembered);
-    $('#result-remembered').text(numRemembered + numSpelling);
-    $('#result-not-remembered').text(numNotRemembered);
+    console.log(remembered);
+    console.log(guessedIncorrectly);
+    console.log(notRemembered);
+    addRemembered();
+    addSpelling();
+    addGuessedIncorrectly();
+    addNotRemembered();
+
+    // $('#num-remembered').text(numRemembered);
+    // $('#num-spelling').text(numSpelling);
+    // $('#num-not-remembered').text(numNotRemembered);
+    // $('#result-remembered').text(numRemembered + numSpelling);
+    // $('#result-not-remembered').text(numNotRemembered);
 
 });

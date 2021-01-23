@@ -4,25 +4,12 @@
   text-align: center;
 }
 
-.bold {
-  font-weight: bold;
+.correct{
+  color: green;
 }
-
-.banner {
-  font-weight: bold;
-  background-color: gainsboro;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  margin-top: 25px;
-  margin-bottom: 5px;
-}
-
 .incorrect{
   text-decoration: line-through;
   color: red;
-}
-.correct{
-  color: green;
 }
 
 a:link, a:visited, a:hover, a:active {

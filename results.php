@@ -29,30 +29,18 @@
         <div class = "row header">
             <h1 id="page-title">The Ultimate Country Capital Test - Your Results</h1>
             You remembered <span id="result-remembered"></span> out of <span id="result-not-remembered"></span> capitals.
-            <div class="banner">
-                Remembered: <span id="num-remembered"></span>
-            </div>
-            <div class="column-holder">
-                <div class = "column" id="remembered-column-1"></div>
-                <div class = "column" id="remembered-column-2"></div>
-                <div class = "column" id="remembered-column-3"></div>
-            </div>
-            <div class="banner">
-                Remembered (with spelling mistake): <span id="num-spelling"></span>
-            </div>
-            <div class="column-holder">
-                <div class = "column" id="spelling-column-1"></div>
-                <div class = "column" id="spelling-column-2"></div>
-                <div class = "column" id="spelling-column-3"></div>
-            </div>
-            <div class="banner">
-                Not remembered: <span id="num-not-remembered"></span>
-            </div>
-            <div class="column-holder">
-                <div class = "column" id="not-remembered-column-1"></div>
-                <div class = "column" id="not-remembered-column-2"></div>
-                <div class = "column" id="not-remembered-column-3"></div>
-            </div>
+
+            <div class="banner">Remembered: <span id="num-remembered"></span></div>
+            <div id="remembered"></div>
+
+            <div class="banner">Remembered (with spelling mistake): <span id="num-spelling"></span></div>
+            <div id="spelling"></div>
+            
+            <div class="banner">Guessed incorrectly: <span id="num-incorrect"></span></div>
+            <div id="incorrect"></div>
+
+            <div class="banner">Not remembered: <span id="num-not-remembered"></span></div>
+            <div id="not-remembered"></div>
 
         <div class = "row footer padded">
             

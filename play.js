@@ -1,5 +1,6 @@
 const fuzzyMatchMinScore = .5
 var done = {};
+var incorrect = {};
 
 function populateAllContinents(){
     populateContinent($('#africa'), africaCapitals);
@@ -45,19 +46,57 @@ function removeCurrentClassFromAllCountries(){
 function checkCapitalInput(){
     let currentCountry = $('#current-country').text();
     let currentCapital = allCapitals[currentCountry];
-    currentVal = $("#capital-input").val();
-    if (textMatch(currentVal, currentCapital)){
-        handleCorrectInput(currentCountry, currentVal);
+    currentInput = $("#capital-input").val();
+    if (textMatch(currentInput, currentCapital)){
+        handleCorrectInput(currentInput);
+    }
+    else{
+        checkForIncorrectInput(currentCountry, currentInput);
     }
 }
 
-function handleCorrectInput(country, currentVal){
-    done[country] = currentVal;
-    let doneCountry = getCurrentCountryLink();
-    selectNext();
-    doneCountry.remove();
+function checkForIncorrectInput(currentCountry, currentInput){
+    let allOtherCountryNames = Object.keys(allCapitals).filter(x=> x!=currentCountry);
+    for (let i=0; i<allOtherCountryNames.length; i++){
+        let thisCountry = allOtherCountryNames[i];
+        if (textMatch(allCapitals[thisCountry], currentInput)){
+            handleIncorrectCountry(thisCountry, currentInput);
+        }
+    }
+    return false;
+}
+
+// === Input handlers ===
+
+function handleCorrectInput(input){
+    let currentCountryName = getCurrentCountryName();
+    done[currentCountryName] = input;
+    removeCurrentAndSelectNext();
     refreshStats();
 }
+
+function handleIncorrectCountry(country, input){
+    let currentCountryName = getCurrentCountryName();
+    incorrect[currentCountryName] = input;
+    alert(`${input} is the capital of ${country}, not ${currentCountryName}! ${country} and ${currentCountryName} removed from list. 0 points scored.`);
+    removeCurrentAndSelectNext();
+    removeCountryLink(country);
+    refreshStats();
+}
+
+function handleIncorrectCapital(input){
+    let currentCountryName = getCurrentCountryName();
+    incorrect[currentCountryName] = input;
+    removeCurrentAndSelectNext();
+    refreshStats();
+}
+
+function removeCurrentAndSelectNext(){
+    let currentCountryLink = getCurrentCountryLink();
+    selectNext();
+    currentCountryLink.remove();
+}
+
 
 function selectFirst() {
     let allCountries = $('.country');
@@ -113,29 +152,35 @@ function revealCapital(){
     let currentCountry = getCurrentCountryLink();
     let currentCountryName = getCurrentCountryName();
     let currentCapitalName = allCapitals[currentCountryName];
-    let currentVal = $("#capital-input").val();
+    let currentInput = $("#capital-input").val();
     let fuzzyMatchScore = 0;
-    if (currentVal.length > 0){
-        fuzzyMatchScore = getFuzzyMatchScore(currentCapitalName, currentVal);
+    if (currentInput.length > 0){
+        fuzzyMatchScore = getFuzzyMatchScore(currentCapitalName, currentInput);
     }
 
     alertText = `
         The capital of ${currentCountryName} is: ${currentCapitalName}\n
-        You entered: ${currentVal}\n
+        You entered: ${currentInput}\n
         Fuzzy match score: ${fuzzyMatchScore.toFixed(1)} (minimum is ${fuzzyMatchMinScore})\n\n
     `
     if (fuzzyMatchScore >= fuzzyMatchMinScore){
         alertText += 'You were given the benefit of the doubt and awarded a point!'
-        handleCorrectInput(currentCountryName, currentVal);
+        handleCorrectInput(currentInput);
     }
     else{
-        alertText += 'Better luck next time!'
+        alertText += 'Better luck next time!';
+        handleIncorrectCapital(currentInput);
     }
     alert(alertText);
+}
 
-    selectNext();
-    currentCountry.remove();
-    refreshStats();
+function removeCountryLink(country){
+    let allCountries = $('.country');
+    let link = jQuery.grep(allCountries, x=>x.text==country);
+    if ($(link[0]).hasClass("current")){
+        selectNext();
+    }
+    link[0].remove();
 }
 
 function getCurrentCountryLink(){
@@ -144,10 +189,6 @@ function getCurrentCountryLink(){
 
 function getCurrentCountryName(){
     return $('.current').text();
-}
-
-function textMatch(a, b){
-    return a.toLowerCase() == b.toLowerCase();
 }
 
 function getFuzzyMatchScore(a,b){
@@ -164,7 +205,8 @@ function getFuzzyMatchScore(a,b){
 
 function toResults(){
     console.log("Going to results...");
-    localStorage.setItem("results", JSON.stringify(done));
+    localStorage.setItem("correct", JSON.stringify(done));
+    localStorage.setItem("incorrect", JSON.stringify(incorrect));
     window.location.href = "results.php";
 }
 
