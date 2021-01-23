@@ -202,7 +202,7 @@ const northAmericaCapitals = {
 const oceaniaCapitals = {
     "Australia": "Canberra",
     "Federated States of Micronesia": "Palikir",
-    "Fiji": "suva",
+    "Fiji": "Suva",
     "Kiribati": "South Tarawa",
     "Marshall Islands": "Majuro",
     "New Zealand": "Wellington",

@@ -1,5 +1,5 @@
 const fuzzyMatchMinScore = .5
-var done = [];
+var done = {};
 
 function populateAllContinents(){
     populateContinent($('#africa'), africaCapitals);
@@ -18,7 +18,7 @@ function populateContinent(continentDiv, capitalsObject){
 }
 
 function refreshStats(){
-    let numDone = done.length;
+    let numDone = Object.keys(done).length;
     let numRemaining = $(".country").length
     $('#num-done').text(numDone);
     $('#num-remaining').text(numRemaining);
@@ -47,12 +47,12 @@ function checkCapitalInput(){
     let currentCapital = allCapitals[currentCountry];
     currentVal = $("#capital-input").val();
     if (textMatch(currentVal, currentCapital)){
-        handleCorrectInput(currentCountry);
+        handleCorrectInput(currentCountry, currentVal);
     }
 }
 
-function handleCorrectInput(country){
-    done.push(country);
+function handleCorrectInput(country, currentVal){
+    done[country] = currentVal;
     let doneCountry = getCurrentCountryLink();
     selectNext();
     doneCountry.remove();
@@ -126,7 +126,7 @@ function revealCapital(){
     `
     if (fuzzyMatchScore >= fuzzyMatchMinScore){
         alertText += 'You were given the benefit of the doubt and awarded a point!'
-        handleCorrectInput(currentCountry);
+        handleCorrectInput(currentCountryName, currentVal);
     }
     else{
         alertText += 'Better luck next time!'
@@ -160,6 +160,12 @@ function getFuzzyMatchScore(a,b){
     else{
         return fuzzyMatchResult[0][0];
     }
+}
+
+function toResults(){
+    console.log("Going to results...");
+    localStorage.setItem("results", JSON.stringify(done));
+    window.location.href = "results.php";
 }
 
 $(document).ready(function () {
