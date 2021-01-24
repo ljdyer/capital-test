@@ -118,3 +118,7 @@ html, body {
 .bad{
     background-color:#FFCCCB;
 }
+
+#page-title{
+    font-weight: bold;
+}

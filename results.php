@@ -6,7 +6,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>The Ultimate Country Capital Test</title>
+    <title>The Ultimate Country Capital Test - Your Results</title>
 
     <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -27,7 +27,7 @@
     <div class="box">
 
         <div class = "row header">
-            <h1 id="page-title">The Ultimate Country Capital Test - Your Results</h1>
+            <h1 id="page-title">Your Results</h1>
             <h2 id="score-summary"></h2>
 
             <div class="banner good">Remembered exactly: <span id="num-remembered"></span></div>
