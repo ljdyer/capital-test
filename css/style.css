@@ -74,7 +74,7 @@ html, body {
 
 .box .row.content {
     flex: 1 1 auto;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 .align-center {
@@ -121,4 +121,8 @@ html, body {
 
 #page-title{
     font-weight: bold;
+}
+
+.best-score{
+    color: green;
 }

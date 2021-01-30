@@ -10,6 +10,7 @@
 
     <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="js/index.js"></script>
     <link rel="stylesheet" href="css/index.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
@@ -19,7 +20,6 @@
     <div class="box">
         <div class="row header">
             <h1 id="page-title">The Ultimate Country Capital Test</h1>
-            <h3>Version 1.1.4</h3>
             <p class="important">Important:<br>
                 This site is not optimised for smartphones. Please access from a desktop or laptop computer.<br>
                 Please read the "Rules of Engagement" and "How to Play" sections below before proceeding.</p>
@@ -29,7 +29,8 @@
             <ul>
                 <li>In order to test that you know what the capital of each country is, and not just the names of the cities, a country must be selected before you can attempt to name its capital.</li>
                 <li>Countries may be selected in any order, and once the capital has been entered correctly the country will be removed from the list so that only the remaining countries are displayed on the page.</li>
-                <li class="bold">New in Version 1.1.2: If you enter the capital of a country other than the one that is currently selected, both the currently selected country and the country with the capital entered will be removed from the list and you will get 0 points!</li>
+                <li>If you enter the capital of a country other than the one that is currently selected, both the currently selected country and the country with the capital entered will be removed from the list and you will get 0 points!</li>
+                <li><a href="#" id="source-of-truth-link">Click here</a> to learn more about the 'source of truth' for country and capital names.</li>
             </ul>
             <h2>How to Play</h2>
             <ul>
@@ -39,19 +40,7 @@
                 <li>You can change the selected country using the "Previous", "Next", or "Random" options, or by clicking directly on any country name in the list.</li>
                 <li class="bold">Hint: There is no need to use your mouse! Use the keyboard shortcuts (Ctrl + direction keys) displayed underneath each option.</li>
             </ul>
-            <h2>Source of Truth</h2>
-            Country and capital names were taken from the Wikipedia <a href="https://simple.wikipedia.org/wiki/List_of_countries_by_continents" target="_blank">List of countries by continents</a> page on 11th Jan 2021 and compiled as follows:
-            <ul>
-                <li>Alternate spellings, translations, etc. removed to leave a single standard country/capital name.</li>
-                <li>Countries without a capital city removed.</li>
-                <li>In cases where more than one capital is listed, cities other than the "official capital" removed.</li>
-                <li>All non-English characters replaced with their closest English equivalent (e.g. 'é' changed to 'e') for ease of input.</li>
-            </ul>
-            <h2>Upcoming Features</h2>
-            <ul>
-                <li>Results history/rankings</li>
-                <li>Practice game to help you remember capitals you didn't know based on your results</li>
-            </ul>
+
             <h2>Get in Touch</h2>
             To suggest new features, report bugs, dispute capitals, etc., please get in touch with the creator Laurence by emailing <a href="mailto:ljdyer@gmail.com">ljdyer@gmail.com</a>.
         </div>
@@ -60,6 +49,20 @@
             <a href="https://github.com/ljdyer/capital-test" target="_blank"><p>View the source at GitHub</p></a>
         </div>
 
+    </div>
+    
+    <div id="source-of-truth-div" style="display: none">
+        <h2>Source of Truth</h2>
+        Country and capital names were taken from the Wikipedia <a
+            href="https://simple.wikipedia.org/wiki/List_of_countries_by_continents" target="_blank">List of countries by
+            continents</a> page on 11th Jan 2021 and compiled as follows:
+        <ul>
+            <li>Alternate spellings, translations, etc. removed to leave a single standard country/capital name.</li>
+            <li>Countries without a capital city removed.</li>
+            <li>In cases where more than one capital is listed, cities other than the "official capital" removed.</li>
+            <li>All non-English characters replaced with their closest English equivalent (e.g. 'é' changed to 'e') for ease
+                of input.</li>
+        </ul>
     </div>
 </body>
 </html>

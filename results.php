@@ -29,7 +29,9 @@
         <div class = "row header">
             <h1 id="page-title">Your Results</h1>
             <h2 id="score-summary"></h2>
-
+            <h2 id="best-score" class="best-score" style="display: none">You beat your previous best score! Congratulations!</h2>
+            <div id="contestants"></div>
+            <hr>
             <div class="banner good">Remembered exactly: <span id="num-remembered"></span></div>
             <div id="remembered"></div>
 

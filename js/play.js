@@ -2,7 +2,22 @@ const fuzzyMatchMinScore = .5
 var done = {};
 var incorrect = {};
 
-function populateAllContinents(){
+// $('.element').fadeTo(100, 0.3, function () { $(this).fadeTo(500, 1.0); });
+
+
+$(document).ready(function () {
+    populateAllContinents();
+    refreshStats();
+    selectFirst();
+    $("#capital-input").on("input", function () {
+        checkCapitalInput();
+    });
+    $(document).keydown(function (event) {
+        handleKeydown(event);
+    });
+});
+
+function populateAllContinents() {
     populateContinent($('#africa'), africaCapitals);
     populateContinent($('#asia'), asiaCapitals);
     populateContinent($('#europe'), europeCapitals);
@@ -18,19 +33,12 @@ function populateContinent(continentDiv, capitalsObject){
     }
 }
 
-function refreshStats(){
-    let numDone = Object.keys(done).length;
-    let numRemaining = $(".country").length
-    $('#num-done').text(numDone);
-    $('#num-remaining').text(numRemaining);
-}
-
-function makeCountry(country){
+function makeCountry(country) {
     let link = $(`<a class="country" href="#" onclick="selectCountry(this);"><span>${country}</span></a>`);
     return link;
 }
 
-function selectCountry(link){
+function selectCountry(link) {
     let country = $(link).text();
     $('#current-country').text(country);
     removeCurrentClassFromAllCountries();
@@ -39,8 +47,15 @@ function selectCountry(link){
     $('#capital-input').focus();
 }
 
-function removeCurrentClassFromAllCountries(){
+function removeCurrentClassFromAllCountries() {
     $('.country').removeClass('current');
+}
+
+function refreshStats(){
+    let numDone = Object.keys(done).length;
+    let numRemaining = $(".country").length
+    $('#num-done').text(numDone);
+    $('#num-remaining').text(numRemaining);
 }
 
 function checkCapitalInput(){
@@ -48,6 +63,7 @@ function checkCapitalInput(){
     let currentCapital = allCapitals[currentCountry];
     currentInput = $("#capital-input").val();
     if (textMatch(currentInput, currentCapital)){
+        showAlert("green", "Correct! 1 point scored.");
         handleCorrectInput(currentInput);
     }
     else{
@@ -78,7 +94,8 @@ function handleCorrectInput(input){
 function handleIncorrectCountry(country, input){
     let currentCountryName = getCurrentCountryName();
     incorrect[currentCountryName] = input;
-    alert(`${input} is the capital of ${country}, not ${currentCountryName}! ${country} and ${currentCountryName} removed from list. 0 points scored.`);
+    showAlert("red", `${input} is the capital of ${country}, not ${currentCountryName}!<br>
+        ${country} and ${currentCountryName} removed from list. 0 points scored.`);
     removeCurrentAndSelectNext();
     removeCountryLink(country);
     refreshStats();
@@ -149,7 +166,6 @@ function getRandomInt(min, max){
 }
 
 function revealCapital(){
-    let currentCountry = getCurrentCountryLink();
     let currentCountryName = getCurrentCountryName();
     let currentCapitalName = allCapitals[currentCountryName];
     let currentInput = $("#capital-input").val();
@@ -158,20 +174,23 @@ function revealCapital(){
         fuzzyMatchScore = getFuzzyMatchScore(currentCapitalName, currentInput);
     }
 
-    alertText = `
-        The capital of ${currentCountryName} is: ${currentCapitalName}\n
-        You entered: ${currentInput}\n
-        Fuzzy match score: ${fuzzyMatchScore.toFixed(1)} (minimum is ${fuzzyMatchMinScore})\n\n
-    `
     if (fuzzyMatchScore >= fuzzyMatchMinScore){
-        alertText += 'You were given the benefit of the doubt and awarded a point!'
+
+        alertText = `
+            The capital of ${currentCountryName} is ${currentCapitalName}.<br>
+            But you were close enough (fuzzy match score: ${fuzzyMatchScore.toFixed(1)})! 1 point awarded.
+        `
+        showAlert("orange", alertText);
         handleCorrectInput(currentInput);
     }
     else{
-        alertText += 'Better luck next time!';
+        alertText = `
+            The capital of ${currentCountryName} is ${currentCapitalName}, not ${currentInput}.<br>
+            0 points awarded.
+        `
+        showAlert("red", alertText);
         handleIncorrectCapital(currentInput);
     }
-    alert(alertText);
 }
 
 function removeCountryLink(country){
@@ -180,7 +199,9 @@ function removeCountryLink(country){
     if ($(link[0]).hasClass("current")){
         selectNext();
     }
-    link[0].remove();
+    if (link.length){
+        link[0].remove();
+    }
 }
 
 function getCurrentCountryLink(){
@@ -203,44 +224,61 @@ function getFuzzyMatchScore(a,b){
     }
 }
 
+function getName(){
+    let nameInput = $(`<input type="text" id="name-input" maxlength="3" size="5"></input>`)
+        .keyup(function(event){
+            if (event.which == 13){
+                if ($(this).val().length == 3) {
+                    toResults();
+                }    
+            }
+            if ($(this).val().length == 3){
+                $("#go-button").prop('disabled', false);
+            }
+            else {
+                $("#go-button").prop('disabled', true);
+            }
+        })
+    $('#to-results')
+        .empty()
+        .append(`<h2>Enter your 3-letter nickname and click GO!</h2>`)
+        .append(nameInput)
+        .append(`<button type="button" id="go-button" onClick="toResults()" disabled>GO</button>`)
+        .append(`<p>Use the same name every time to track your best score and see how you compare with other players!</p>`)
+    nameInput.focus();
+}
+
+
 function toResults(){
-    console.log("Going to results...");
     localStorage.setItem("correct", JSON.stringify(done));
     localStorage.setItem("incorrect", JSON.stringify(incorrect));
+    localStorage.setItem("username", $('#name-input').val().toUpperCase());
     window.location.href = "results.php";
 }
 
-$(document).ready(function () {
-
-    populateAllContinents();
-    refreshStats();
-    selectFirst();
-
-    $("#capital-input").on("input", function () {
-        checkCapitalInput();
-    });
-
-    $(document).keydown(function (event) {
-        if (event.ctrlKey || event.metaKey){
-            switch (event.which){
-                case 37: {// Left
-                    selectPrevious();
-                    break;
-                }
-                case 39: { // Right
-                    selectNext();
-                    break;
-                }
-                case 38: { // Up
-                    selectRandom();
-                    break;
-                }
-                case 40: { // Down
-                    revealCapital();
-                    break;
-                }
+function handleKeydown(event) {
+    if (event.ctrlKey || event.metaKey) {
+        switch (event.which) {
+            case 37: {// Left
+                selectPrevious();
+                break;
+            }
+            case 39: { // Right
+                selectNext();
+                break;
+            }
+            case 38: { // Up
+                selectRandom();
+                break;
+            }
+            case 40: { // Down
+                revealCapital();
+                break;
             }
         }
-    });
+    }
+}
 
-});
+function showAlert(color, text){
+    $('#alert-text').fadeOut(300, function(){$(this).css({color: color}).html(text).fadeIn(300)});
+}

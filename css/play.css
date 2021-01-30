@@ -42,3 +42,10 @@ a:link, a:visited, a:hover, a:active {
 .control-table{
   width: 40%;
 }
+
+#name-input, #go-button{
+  text-align: center;
+  font-size: 24;
+  margin-left: 5px;
+  margin-right: 5px;
+}
